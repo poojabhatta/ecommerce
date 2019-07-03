@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+<style>
+    .card-body {
+        margin: 10px;
+        padding: 0px;
+    }
+
+
+    .col-12, .col-md-6 {
+        padding: 0px !important;
+        margin-bottom: 5px !important;
+    }
+
+    
+
+</style>
+
+{% block content %}
+
+    <div class='row'>
+        <div class='col-12 col-md-6' style="margin-bottom:10px;">
+                <h1>{{ object.title }}</h1>
+                {{ object.timestamp|timesince }} ago
+                {{ object.description|linebreaks }}<br/>
+                {% comment %}
+                {% if object.image %}
+                    <img src='{{ object.image.url }}' class='img-fluid'/>
+                {% endif %}
+                {% endcomment %}
+        </div>
+        <div class='col-12 col-md-6'>
+            {% include 'products/snippets/update-cart.html' with product=object cart=cart %}
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <h4> PRODUCT IN SAME CATEGORIEIS </h3>
+    <div class="row">
+        {% for category in same_categories %}
+        <div class="col-12 col-md-3">
+            <div class="card list-item" style="margin-bottom:10px;">
+                    <div class="card-body">
+                          <h4 class="card-title">{{ category.name }}</h4>
+                          <p class="card-text"></p><p>{{ category.description |truncatechars:25}}</p><p></p>
+                          
+                          <div class="text-center">
+                              <a href="/products/t-shirt/" class="btn btn-primary my-2">View</a>
+                              <form class="form-product-ajax" method="POST" action="/cart/update/" data-endpoint="/cart/update/"> <input type="hidden" name="csrfmiddlewaretoken" value="ThdIWHpRrj8ZwgrACwzvLp6v74JnqiOAaQVatLQIF8KuDTdNpd2LGuqFY36fwXl8">
+                          <input type="hidden" name="product_id" value="1" data-is-digital="true">
+                            <span class="submit-span">
+                          
+                              <button type="submit" class="btn btn-success">Add to cart</button>
+                          
+                          </span>
+                      </form>
+                          </div>
+                         
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h3> MORE PRODUCTS </h3>
+    <div class="row">
+        {% for price in same_price %}
+            <div class="col-12 col-md-3">
+                    <div class="card list-item">
+                            <div class="card-body">
+                                  <h4 class="card-title">{{ price.name }}</h4>
+                                  <p class="card-text"></p><p>{{ price.description |truncatechars:25}}</p><p></p>
+                                  
+                                  <div class="text-center">
+                                      <a href="/products/t-shirt/" class="btn btn-primary my-2">View</a>
+                                      <form class="form-product-ajax" method="POST" action="/cart/update/" data-endpoint="/cart/update/"> <input type="hidden" name="csrfmiddlewaretoken" value="ThdIWHpRrj8ZwgrACwzvLp6v74JnqiOAaQVatLQIF8KuDTdNpd2LGuqFY36fwXl8">
+                                  <input type="hidden" name="product_id" value="1" data-is-digital="true">
+                                    <span class="submit-span">
+                                  
+                                      <button type="submit" class="btn btn-success">Add to cart</button>
+                                  
+                                  </span>
+                              </form>
+                                  </div>
+                                 
+                            </div>
+                    </div>
+                </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+
+<script src="{% static 'static_root/js/jquery.matchHeight.js' %}"></script>
+<script>
+
+$(function () {
+    $('.list-item').matchHeight({
+        byRow: true,
+        property: 'height',
+        target: null,
+        remove: false
+    });
+});
+
+</script>
