@@ -38,12 +38,10 @@ MANAGERS = (
 
 ADMINS = MANAGERS
 
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.pythonecommerce.com', 'cfename.herokuapp.com', 'poojabhatta.herokuapp.com']
+ALLOWED_HOSTS = ['.pythonecommerce.com', 'cfename.herokuapp.com', 'poojabhatta.herokuapp.com', 'localhost']
 
 # Application definition
 
